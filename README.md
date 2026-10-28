@@ -22,8 +22,6 @@ pixi install
 
 If you already downloaded or cloned the project, just open a terminal in that folder and run `pixi install`.
 
-> If the repository has moved to the BHK Lab organization, use its new GitHub URL instead.
-
 ### 2. Set up your PubMed search
 
 Open **`inputs/config.toml`** in a text editor (such as VS Code). Check these settings:
