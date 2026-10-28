@@ -1,0 +1,29 @@
+
+[workspace]
+name = "paper2signature"
+version = "0.1.0"
+description = "Literature-based discovery and extraction of biological gene signatures"
+channels = ["conda-forge"]
+platforms = ["win-64", "linux-64", "osx-arm64"]
+
+[dependencies]
+python = "3.11.*"
+
+# General data handling
+pandas = ">=2.2,<3"
+numpy = ">=1.26,<3"
+
+# HTTP requests and configuration
+requests = ">=2.32,<3"
+pyyaml = ">=6,<7"
+python-dotenv = ">=1,<2"
+
+# Development and quality control
+pytest = ">=8,<10"
+ruff = ">=0.9,<1"
+
+[tasks]
+check-python = "python --version"
+test = "python -m pytest tests"
+lint = "ruff check ."
+

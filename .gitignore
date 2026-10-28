@@ -1,0 +1,26 @@
+# Pixi environment
+.pixi/
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+
+# Credentials
+.env
+.env.*
+!.env.example
+
+# IDE
+.vscode/
+.idea/
+
+# Generated outputs
+results/
+logs/
+cache/
+
+# Operating system
+.DS_Store
+Thumbs.db
