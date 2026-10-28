@@ -54,12 +54,11 @@ A new timestamped folder will appear under **`outputs/`**, containing files such
 
 ```text
 outputs/
-└── 20261028T190943_802126Z/
-    ├── results_001_query_1.xml
-    ├── results_002_query_2.xml
-    ├── results_003_query_3.xml
-    ├── summary.csv
-    └── run_metadata.json
+└── <RUN_ID>/
+    ├── results_*.xml          # PubMed records for each query 
+    ├── summary.csv            # Search-level summary
+    ├── run_metadata.json      # Run information
+    └── results_*_summary.csv  # Extracted publication data
 ```
 
 The timestamp above is an **example**; your folder name will be different. If one query fails, check `summary.csv` for its status and error.
