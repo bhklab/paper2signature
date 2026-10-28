@@ -116,20 +116,6 @@ pixi run test
 pixi run python main.py --help
 ```
 
-## Common questions
-
-**Why did I get only 10 papers per query?**  
-The configuration uses `retmax = 10` for testing. Increasing the date range alone does not retrieve all PubMed matches. Comprehensive retrieval will require batching or pagination.
-
-**Can I regenerate the CSVs without searching PubMed again?**  
-Yes. Rerun Step 4 on your existing XML files.
-
-**Where are my results?**  
-Look inside `outputs/`, in the timestamped folder created by the search. Generated output files are normally excluded from Git tracking.
-
-**Does this automatically extract validated signature gene lists?**  
-Not yet. The current CSVs are for preliminary publication screening; detailed extraction and verification are planned extensions.
-
 ## Acknowledgments
 
 This project builds on the original paper-query workflow from the **BHK Lab**: [bhklab/query_papers](https://github.com/bhklab/query_papers).
