@@ -90,7 +90,7 @@ Open the CSV files in Excel or your preferred data-analysis software:
 | `results_*_summary.csv` | One row per retrieved paper, including title, abstract, PMID, and preliminary screening annotations. |
 | `run_metadata.json` | Settings and metadata for the search run. |
 
-**Important:** Screening labels are based on text patterns and are **not confirmed signature findings**. A paper mentioning RNA, DNA, or TMB does not necessarily report a novel predictive signature. Review the scientific evidence before including a paper in a curated catalogue.
+**Important:** Screening labels are based on text patterns and are **not confirmed signature findings**. 
 
 ## Check that the project is working
 
