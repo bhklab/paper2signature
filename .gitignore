@@ -1,16 +1,4 @@
-# Pixi environment
-.pixi/
 
-# Python
-__pycache__/
-*.pyc
-.pytest_cache/
-.ruff_cache/
-
-# Credentials
-.env
-.env.*
-!.env.example
 
 # IDE
 .vscode/
@@ -24,3 +12,6 @@ cache/
 # Operating system
 .DS_Store
 Thumbs.db
+
+# Generated PubMed results
+outputs/
