@@ -1,69 +1,137 @@
 # paper2signature
 
-A reproducible pipeline for literature-based discovery, extraction, and curation of biological gene signatures.
+A reproducible workflow for finding scientific publications and identifying candidate molecular signatures.
 
-**paper2signature** provides a collaborative framework for querying scientific publications, identifying relevant molecular signatures, and preparing structured information for downstream curation and LLM-assisted extraction. It aims to support reproducible literature mining and downstream computational and translational research.
+**paper2signature** helps researchers search PubMed, save publication records, and create CSV tables for reviewing potential biological signatures and biomarkers. It is designed for collaborative research and future LLM-assisted extraction and curation.
 
-## Overview
+> **What works today?** PubMed searches, XML downloads, and preliminary title/abstract screening. Automated full-text verification, comprehensive retrieval of every search match, and LLM-assisted signature extraction are not yet part of this workflow.
 
-The framework supports literature discovery, preliminary signature screening, and structured publication-level outputs across molecular data modalities. Current functionality includes **PubMed search and XML retrieval** and **rule-based screening of titles and abstracts**. Comprehensive retrieval of large search result sets, full-text signature verification, and LLM-assisted extraction are future extensions.
+## Quick start
 
-## Getting started
+### 1. Get the repository and set up Pixi
 
-Install [Pixi](https://pixi.sh/) and, from the repository root, prepare the environment:
+Install [Pixi](https://pixi.sh/) if you do not already have it.
+
+Clone the repository from its current GitHub location, then open a terminal in the project folder. For example:
 
 ```bash
+git clone https://github.com/RibaA/paper2signature.git
+cd paper2signature
 pixi install
 ```
 
-Edit `inputs/config.toml` to set your NCBI Entrez email, PubMed queries, publication date range, and `retmax` (maximum records retrieved per query).
+If you already downloaded or cloned the project, just open a terminal in that folder and run `pixi install`.
 
-## Usage
+> If the repository has moved to the BHK Lab organization, use its new GitHub URL instead.
 
-### 1. Search PubMed
+### 2. Set up your PubMed search
+
+Open **`inputs/config.toml`** in a text editor (such as VS Code). Check these settings:
+
+```toml
+email = "your.email@institution.org"
+retmax = 10
+date_start = "2022/01/01"
+date_end = "2022/12/31"
+```
+
+- **`email`**: Your contact email for NCBI Entrez requests.
+- **`retmax`**: Maximum number of publication records to retrieve *per query* in the current implementation. Start with `10` for a trial run.
+- **`date_start` / `date_end`**: Publication date range.
+- **`queries`**: The PubMed searches defined later in the same configuration file.
+
+Save the file before running the search.
+
+### 3. Search PubMed
+
+In the project folder, run:
 
 ```bash
 pixi run python main.py --config inputs/config.toml
 ```
 
-This creates a timestamped directory under `outputs/` with PubMed XML files, a search-level `summary.csv`, and `run_metadata.json`.
+A new timestamped folder will appear under **`outputs/`**, containing files such as:
 
-### 2. Extract publication CSVs
+```text
+outputs/
+└── 20261028T190943_802126Z/
+    ├── results_001_query_1.xml
+    ├── results_002_query_2.xml
+    ├── results_003_query_3.xml
+    ├── summary.csv
+    └── run_metadata.json
+```
 
-In **Git Bash**, identify the newest output folder:
+The timestamp above is an **example**; your folder name will be different. If one query fails, check `summary.csv` for its status and error.
+
+### 4. Convert the XML records to CSV
+
+You do not need another Python script. The existing **`summarize_pubmed.py`** handles this step.
+
+**For Git Bash (Windows) or a Bash terminal**, run:
 
 ```bash
 RUN_DIR=$(find outputs -mindepth 1 -maxdepth 1 -type d | sort | tail -n 1)
 echo "$RUN_DIR"
-```
 
-Then convert every XML file in that folder to a screening CSV using the existing script:
-
-```bash
 for xml in "$RUN_DIR"/results_*.xml; do
-    [ -f "$xml" ] || continue
     pixi run python src/query_papers/summarize_pubmed.py --input "$xml"
 done
 ```
 
-Each `results_*.xml` produces a corresponding `results_*_summary.csv` in the same directory. These contain publication metadata and preliminary screening annotations. **The current workflow does not automatically create a deduplicated master catalogue.**
+This processes every `results_*.xml` file in the selected run and creates a CSV beside each XML, for example:
 
-### 3. Validate the project
+```text
+results_001_query_1_summary.csv
+results_002_query_2_summary.csv
+results_003_query_3_summary.csv
+```
+
+**Prefer to process one file at a time?** Replace the example folder below with your actual run folder:
+
+```bash
+pixi run python src/query_papers/summarize_pubmed.py \
+  --input outputs/20261028T190943_802126Z/results_001_query_1.xml
+```
+
+### 5. Review your results
+
+Open the CSV files in Excel or your preferred data-analysis software:
+
+| File | What it contains |
+| --- | --- |
+| `summary.csv` | Number of PubMed matches, downloaded-record counts, and query status. |
+| `results_*_summary.csv` | One row per retrieved paper, including title, abstract, PMID, and preliminary screening annotations. |
+| `run_metadata.json` | Settings and metadata for the search run. |
+
+**Important:** Screening labels are based on text patterns and are **not confirmed signature findings**. A paper mentioning RNA, DNA, or TMB does not necessarily report a novel predictive signature. Review the scientific evidence before including a paper in a curated catalogue.
+
+## Check that the project is working
+
+Run these commands from the project folder:
 
 ```bash
 pixi run lint
 pixi run test
+pixi run python main.py --help
 ```
 
-## Notes
+## Common questions
 
-- Screening labels are keyword-based candidates, **not confirmed molecular signatures or verified ICB-response predictors**.
-- `retmax` limits the number of records downloaded per query; the returned PubMed match count may be much larger.
-- Generated `outputs/` files are normally excluded from Git version control.
-- The Python module is currently named `query_papers` for compatibility with the existing implementation.
+**Why did I get only 10 papers per query?**  
+The configuration uses `retmax = 10` for testing. Increasing the date range alone does not retrieve all PubMed matches. Comprehensive retrieval will require batching or pagination.
+
+**Can I regenerate the CSVs without searching PubMed again?**  
+Yes. Rerun Step 4 on your existing XML files.
+
+**Where are my results?**  
+Look inside `outputs/`, in the timestamped folder created by the search. Generated output files are normally excluded from Git tracking.
+
+**Does this automatically extract validated signature gene lists?**  
+Not yet. The current CSVs are for preliminary publication screening; detailed extraction and verification are planned extensions.
 
 ## Acknowledgments
 
-This project builds upon the paper-query workflow developed at the **BHK Lab**: [bhklab/query_papers](https://github.com/bhklab/query_papers).
+This project builds on the original paper-query workflow from the **BHK Lab**: [bhklab/query_papers](https://github.com/bhklab/query_papers).
 
-The current repository extends this foundation through improved code organization, reproducible environment management with Pixi, and preparation for downstream signature extraction and validation workflows.
+The repository extends that foundation with reproducible environment management using Pixi and a workflow intended to support downstream signature extraction and curation.
