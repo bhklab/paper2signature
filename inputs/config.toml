@@ -2,9 +2,9 @@
 # Three queries: RNA, DNA (including TMB), and integrated RNA+DNA.
 # Pilot: 2022 only and maximum 10 XML records per search.
 email = "farnoosh.abbasaghababazadeh@uhn.ca"
-retmax = 10
+retmax = 1000
 date_start = "2022/01/01"
-date_end = "2022/12/31"
+date_end = "2028/10/28"
 
 queries = [
   # 1: RNA / transcriptomic signatures
