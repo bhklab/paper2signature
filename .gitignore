@@ -1,17 +1,27 @@
-
-
 # IDE
 .vscode/
 .idea/
+
+# Python cache and temporary files
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+
+# Pixi environment
+.pixi/
 
 # Generated outputs
 results/
 logs/
 cache/
+outputs/
+
+# Local environment variables and secrets
+.env
+.env.*
+!.env.example
 
 # Operating system
 .DS_Store
 Thumbs.db
-
-# Generated PubMed results
-outputs/
