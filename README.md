@@ -61,7 +61,7 @@ outputs/
     └── results_*_summary.csv  # Extracted publication data
 ```
 
-The timestamp above is an **example**; your folder name will be different. If one query fails, check `summary.csv` for its status and error.
+If one query fails, check `summary.csv` for its status and error.
 
 ### 4. Convert the XML records to CSV
 
