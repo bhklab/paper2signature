@@ -21,6 +21,7 @@ python-dotenv = ">=1,<2"
 # Development and quality control
 pytest = ">=8,<10"
 ruff = ">=0.9,<1"
+biopython = ">=1.88,<2"
 
 [tasks]
 check-python = "python --version"

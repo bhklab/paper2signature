@@ -1,0 +1,120 @@
+# MAR-40 | PD-1/PD-L1/CTLA-4 immunotherapy signature discovery
+# Three queries: RNA, DNA (including TMB), and integrated RNA+DNA.
+# Pilot: 2022 only and maximum 10 XML records per search.
+email = "farnoosh.abbasaghababazadeh@uhn.ca"
+retmax = 10
+date_start = "2022/01/01"
+date_end = "2022/12/31"
+
+queries = [
+  # 1: RNA / transcriptomic signatures
+  '''
+  (
+    "immune checkpoint blockade"[tiab] OR "immune checkpoint inhibitor"[tiab]
+    OR "immune checkpoint inhibitors"[tiab] OR "checkpoint blockade"[tiab]
+    OR "anti-PD-1"[tiab] OR "anti-PD-L1"[tiab] OR "anti-CTLA-4"[tiab]
+    OR "PD-1"[tiab] OR "PD-L1"[tiab] OR "CTLA-4"[tiab]
+    OR pembrolizumab[tiab] OR nivolumab[tiab] OR cemiplimab[tiab]
+    OR dostarlimab[tiab] OR toripalimab[tiab] OR sintilimab[tiab]
+    OR tislelizumab[tiab] OR camrelizumab[tiab]
+    OR atezolizumab[tiab] OR durvalumab[tiab] OR avelumab[tiab]
+    OR ipilimumab[tiab] OR tremelimumab[tiab]
+  )
+  AND
+  (
+    "gene expression signature"[tiab] OR "transcriptomic signature"[tiab]
+    OR "RNA signature"[tiab] OR "immune signature"[tiab]
+    OR "gene signature"[tiab] OR "expression signature"[tiab]
+    OR "expression-based signature"[tiab]
+    OR "gene expression classifier"[tiab]
+    OR "transcriptional signature"[tiab]
+    OR "transcriptional program"[tiab]
+    OR "immune-related signature"[tiab]
+    OR "T cell exhaustion signature"[tiab]
+    OR "interferon gamma signature"[tiab]
+    OR "tumor inflammation signature"[tiab]
+    OR "tumour inflammation signature"[tiab]
+    OR "single-cell RNA"[tiab] OR "spatial transcriptomic"[tiab]
+  )
+  AND
+  (
+    response[tiab] OR resistance[tiab] OR responder[tiab]
+    OR nonresponder[tiab] OR "non-responder"[tiab]
+    OR predictive[tiab] OR predictor[tiab] OR prediction[tiab]
+    OR biomarker[tiab] OR sensitivity[tiab]
+    OR "clinical benefit"[tiab] OR "treatment outcome"[tiab]
+  )
+  ''',
+  # 2: DNA / genomic signatures, TMB and mutation-derived biomarkers
+  '''
+  (
+    "immune checkpoint blockade"[tiab] OR "immune checkpoint inhibitor"[tiab]
+    OR "immune checkpoint inhibitors"[tiab] OR "checkpoint blockade"[tiab]
+    OR "anti-PD-1"[tiab] OR "anti-PD-L1"[tiab] OR "anti-CTLA-4"[tiab]
+    OR "PD-1"[tiab] OR "PD-L1"[tiab] OR "CTLA-4"[tiab]
+    OR pembrolizumab[tiab] OR nivolumab[tiab] OR cemiplimab[tiab]
+    OR dostarlimab[tiab] OR toripalimab[tiab] OR sintilimab[tiab]
+    OR tislelizumab[tiab] OR camrelizumab[tiab]
+    OR atezolizumab[tiab] OR durvalumab[tiab] OR avelumab[tiab]
+    OR ipilimumab[tiab] OR tremelimumab[tiab]
+  )
+  AND
+  (
+    "DNA signature"[tiab] OR "genomic signature"[tiab]
+    OR "mutational signature"[tiab] OR "mutation signature"[tiab]
+    OR "mutation-based signature"[tiab] OR "mutation-derived signature"[tiab]
+    OR "genomic classifier"[tiab] OR "genomic biomarker"[tiab]
+    OR "mutational profile"[tiab] OR "genomic profile"[tiab]
+    OR "tumor mutational burden"[tiab] OR "tumour mutational burden"[tiab]
+    OR "microsatellite instability"[tiab]
+    OR "mismatch repair deficiency"[tiab]
+    OR "DNA repair"[tiab] OR "homologous recombination deficiency"[tiab]
+    OR "copy number"[tiab] OR "chromosomal instability"[tiab]
+    OR "DNA methylation"[tiab] OR "methylation signature"[tiab]
+    OR "neoantigen burden"[tiab] OR "neoantigen signature"[tiab]
+  )
+  AND
+  (
+    response[tiab] OR resistance[tiab] OR responder[tiab]
+    OR nonresponder[tiab] OR predictive[tiab] OR predictor[tiab]
+    OR prediction[tiab] OR biomarker[tiab] OR sensitivity[tiab]
+    OR "clinical benefit"[tiab] OR "treatment outcome"[tiab]
+  )
+  ''',
+  # 3: RNA AND DNA concepts alongside an integrated predictive model
+  '''
+  (
+    "immune checkpoint blockade"[tiab] OR "immune checkpoint inhibitor"[tiab]
+    OR "immune checkpoint inhibitors"[tiab] OR "checkpoint blockade"[tiab]
+    OR "anti-PD-1"[tiab] OR "anti-PD-L1"[tiab] OR "anti-CTLA-4"[tiab]
+    OR "PD-1"[tiab] OR "PD-L1"[tiab] OR "CTLA-4"[tiab]
+    OR pembrolizumab[tiab] OR nivolumab[tiab]
+    OR atezolizumab[tiab] OR durvalumab[tiab]
+    OR ipilimumab[tiab] OR tremelimumab[tiab]
+  )
+  AND
+  (
+    ("RNA-seq"[tiab] OR "RNA sequencing"[tiab]
+     OR transcriptomic[tiab] OR "gene expression"[tiab]
+     OR "RNA signature"[tiab] OR "transcriptional signature"[tiab])
+    AND
+    ("DNA sequencing"[tiab] OR "whole exome sequencing"[tiab]
+     OR "whole genome sequencing"[tiab] OR genomic[tiab]
+     OR mutational[tiab] OR "DNA methylation"[tiab]
+     OR "copy number"[tiab] OR "tumor mutational burden"[tiab]
+     OR "tumour mutational burden"[tiab])
+  )
+  AND
+  (
+    signature[tiab] OR classifier[tiab] OR "predictive model"[tiab]
+    OR "multi-omics"[tiab] OR multiomics[tiab]
+    OR "integrated biomarker"[tiab]
+    OR "integrated signature"[tiab] OR "combined signature"[tiab]
+  )
+  AND
+  (
+    response[tiab] OR resistance[tiab] OR predictive[tiab]
+    OR prediction[tiab] OR biomarker[tiab] OR "clinical benefit"[tiab]
+  )
+  '''
+]
