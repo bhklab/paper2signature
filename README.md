@@ -79,20 +79,7 @@ for xml in "$RUN_DIR"/results_*.xml; do
 done
 ```
 
-This processes every `results_*.xml` file in the selected run and creates a CSV beside each XML, for example:
-
-```text
-results_001_query_1_summary.csv
-results_002_query_2_summary.csv
-results_003_query_3_summary.csv
-```
-
-**Prefer to process one file at a time?** Replace the example folder below with your actual run folder:
-
-```bash
-pixi run python src/query_papers/summarize_pubmed.py \
-  --input outputs/20261028T190943_802126Z/results_001_query_1.xml
-```
+This processes every `results_*.xml` file in the selected run and creates a CSV beside each XML.
 
 ### 5. Review your results
 
