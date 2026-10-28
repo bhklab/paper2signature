@@ -6,7 +6,7 @@ A reproducible pipeline for literature-based discovery, extraction, and curation
 
 The repository aims to improve reproducibility, streamline literature mining, and facilitate integration of curated signatures into downstream computational analyses.
 
-## Acknowledgments and Previous Work
+## Acknowledgments 
 
 This project builds upon the original paper-query workflow developed at the BHK Lab (https://github.com/bhklab/query_papers).
 
