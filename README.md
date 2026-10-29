@@ -13,7 +13,7 @@ Install [Pixi](https://pixi.sh/) if you do not already have it.
 Clone the repository from its current GitHub location, then open a terminal in the project folder. For example:
 
 ```bash
-git clone https://github.com/RibaA/paper2signature.git
+git clone https://github.com/bhklab/paper2signature.git
 cd paper2signature
 pixi install
 ```
