@@ -24,13 +24,6 @@ If you already downloaded or cloned the project, just open a terminal in that fo
 
 Open **`inputs/config.toml`** in a text editor (such as VS Code). Check these settings:
 
-```toml
-email = "your.email@institution.org"
-retmax = 10
-date_start = "2022/01/01"
-date_end = "2022/12/31"
-```
-
 - **`email`**: Your contact email for NCBI Entrez requests.
 - **`retmax`**: Maximum number of publication records to retrieve *per query* in the current implementation. Start with `10` for a trial run.
 - **`date_start` / `date_end`**: Publication date range.
