@@ -4,8 +4,6 @@ A reproducible workflow for finding scientific publications and identifying cand
 
 **paper2signature** helps researchers search PubMed, save publication records, and create CSV tables for reviewing potential biological signatures and biomarkers. It is designed for collaborative research and future LLM-assisted extraction and curation.
 
-> **What works today?** PubMed searches, XML downloads, and preliminary title/abstract screening. Automated full-text verification, comprehensive retrieval of every search match, and LLM-assisted signature extraction are not yet part of this workflow.
-
 ## Quick start
 
 ### 1. Get the repository and set up Pixi
